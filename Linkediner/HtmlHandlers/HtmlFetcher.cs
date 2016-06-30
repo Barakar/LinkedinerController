@@ -8,7 +8,7 @@ namespace Linkediner.HtmlHandlers
 {
     public class HtmlFetcher : IHtmlFetcher
     {
-        private HttpClient _webClient;
+        private readonly HttpClient _httpClient;
 
         /// <summary>
         /// Init the default WebClient 
@@ -20,25 +20,25 @@ namespace Linkediner.HtmlHandlers
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
             };
 
-            _webClient = new HttpClient(autoDecompressionHandler);
+            _httpClient = new HttpClient(autoDecompressionHandler);
         }
 
         /// <summary>
         /// for test manners.
         /// </summary>
-        /// <param name="webClient"></param>
-        public HtmlFetcher(HttpClient webClient)
+        /// <param name="httpClient"></param>
+        public HtmlFetcher(HttpClient httpClient)
         {
-            _webClient = webClient;
+            _httpClient = httpClient;
         }
 
         public void AddHeader(string name, string value)
         {
-            _webClient.DefaultRequestHeaders.Add(name, value);
+            _httpClient.DefaultRequestHeaders.Add(name, value);
         }
         public async Task<HtmlDocument> Fetch(string address)
         {
-            var sourceCode = await _webClient.GetStringAsync(address).ConfigureAwait(false);
+            var sourceCode = await _httpClient.GetStringAsync(address).ConfigureAwait(false);
 
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(sourceCode);

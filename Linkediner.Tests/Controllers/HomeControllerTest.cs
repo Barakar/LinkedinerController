@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
 using Linkediner.DAL;
 using Linkediner.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Linkediner;
-using Linkediner.Controllers;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
